@@ -1,5 +1,6 @@
 package Runner;
 
+import StepDefinationsFiles.GetUser;
 import StepDefinationsFiles.Login;
 import StepDefinationsFiles.Subscription;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
@@ -17,16 +18,16 @@ import org.testng.annotations.BeforeClass;
 public class TestRunner extends AbstractTestNGCucumberTests {
 
     private  Login loginInstance;
-    private  Subscription subscriptionInstance;
+    private  GetUser getUserInstance;
 
     @BeforeClass
     public void setup() {
         // Initialize instances of Login and Subscription classes
         loginInstance = new Login();
-        subscriptionInstance = new Subscription();
+        getUserInstance = new GetUser();
 
         // Set the Login instance in the Subscription class
-        subscriptionInstance.setLoginInstance(loginInstance);
+        getUserInstance.setLoginInstance(loginInstance);
 
     }
 }

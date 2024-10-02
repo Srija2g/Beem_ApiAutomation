@@ -19,29 +19,21 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 
 public class baseClass {
-	
-	
-	protected static Properties properties;
-
-  //  protected static WebDriver driver;
+    protected static Properties properties;
     protected static Connection con;
-
-
-
-    public baseClass() {    
-    try {
-        properties = new Properties();
-        FileInputStream ip = new FileInputStream(System.getProperty("user.dir")
-                + "/src/main/java/BeemDataSource/BeemAppConstants.properties");
-        properties.load(ip);
-    } catch (FileNotFoundException ex) {
-        ex.printStackTrace();
-        System.out.println("file not found");
-    } catch (IOException e) {
-        System.out.println("io exception");
-    }  
-    
-}
+    public baseClass() {
+        try {
+            properties = new Properties();
+            FileInputStream ip = new FileInputStream(System.getProperty("user.dir")
+                    + "/src/main/java/BeemDataSource/BeemAppConstants.properties");
+            properties.load(ip);
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+            System.out.println("file not found");
+        } catch (IOException e) {
+            System.out.println("io exception");
+        }
+    }
     
     
     protected static void setbaseURL(String env) {
@@ -49,13 +41,7 @@ public class baseClass {
         if ( env.equalsIgnoreCase("dev")) {
             baseUrl = properties.getProperty("DevBaseURL_BEEM");
         }
-       
         RestAssured.baseURI = baseUrl;
-    }
-
-    public static JsonPath jsonpath(Response response) {
-        JsonPath jpath = new JsonPath(response.asString());
-        return jpath;
     }
 
     public static void verifyStatusCode_OK(Response response) {
@@ -65,20 +51,8 @@ public class baseClass {
         System.out.println("Validation of Status Code completed ");
     }
 
-    public static void verifyBadStatusCode_OK(Response response, String statuscode) {
-        int statusCode = response.getStatusCode();
-        Assert.assertEquals(statusCode, Integer.parseInt(statuscode));
-        System.out.println("Validation of Status Code completed :" +statuscode+ " Bad Request ");
-        System.out.println("Response Message : "+response.statusLine());
+    public static JsonPath jsonpath(Response response) {
+        JsonPath jpath = new JsonPath(response.asString());
+        return jpath;
     }
-
-    public static void verify(Response response) {
-        int statusCode = response.getStatusCode();
-        Assert.assertEquals(statusCode, 400);
-        System.out.println("Validation of Status Code completed : ");
-        System.out.println("Response Message : "+response.statusLine());
-    }
-
-
-
 }

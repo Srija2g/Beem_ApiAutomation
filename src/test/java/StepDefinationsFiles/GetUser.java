@@ -4,16 +4,19 @@ import AppBase.baseClass;
 import BeemAPIs.beemHttpMethods;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.Assert;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static StepDefinationsFiles.Login.tokenID;
+
 public class GetUser extends baseClass {
     protected Response response;
     protected String userAccountStatus;
-    protected String subscriptionPlan;
+    protected String subscriptionPlan ;
     protected String subscriptionFees;
 
     private Login login;
@@ -27,8 +30,8 @@ public class GetUser extends baseClass {
 
     @When("we get the details from Get user Api")
     public void weGetTheDetailsFromGetUserApi() {
-        Login login = new Login();
-        String tokenID = login.ExtractTheIDTokenFromResponse();
+//        Login login = new Login();
+//        String tokenID = login.ExtractTheIDTokenFromResponse();
         this.response = beemHttpMethods.getUserInfo(tokenID);
         System.out.println(tokenID);
     }
@@ -44,7 +47,7 @@ public class GetUser extends baseClass {
     public void printTheSubscriptionPlanAndFees() {
         subscriptionPlan = jsonpath(response).get("data.getUser.subscriptionPlan");
         subscriptionFees = jsonpath(response).get("data.getUser.subscriptionFees");
-        System.out.println("The user is subscribed to " + subscriptionPlan+ "with subscription fees" + subscriptionFees);
+        System.out.println("The user is subscribed to " + subscriptionPlan+ " plan with subscription fees of " + subscriptionFees);
     }
 
 

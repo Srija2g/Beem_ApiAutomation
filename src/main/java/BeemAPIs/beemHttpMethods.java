@@ -14,27 +14,28 @@ public static Response responseObj;
 
     public static Response getSessionID(){
          responseObj = RestAssured.
-                given().log().all().
+                given().
                 contentType("application/json").
                 header("appversion","4.3.129(1)").
                 body(cognitoSigninCodePayload.cognitoSigninCodeGetSessionIDPayload).
-                when().log().all().
+                when().
                 post()
-                .then().log().all().
+                .then().
                 extract().response();
+        System.out.println(responseObj.asString());
         return responseObj;
     }
 
 
     public static Response getIDToken(String sessionID){
          responseObj = RestAssured.
-                given().log().all().
+                given().
                 contentType("application/json").
                 header("appversion","4.3.129(1)").
                 body(cognitoSigninPayload.cognitoSigninGetIDTokenPayload(sessionID)).
-                when().log().all().
+                when().
                 post()
-                .then().log().all().
+                .then().
                 extract().response();
         return responseObj;
     }

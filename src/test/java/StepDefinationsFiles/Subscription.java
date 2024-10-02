@@ -41,7 +41,7 @@ public class Subscription extends baseClass {
     @Then("Extract the subscription id from response")
     public void extractTheSubscriptionIdFromResponse() {
 
-        subscriptionID = jsonpath(response).getString("data.createNewSubscription.subscriptionId");
+     //   subscriptionID = jsonpath(response).getString("data.createNewSubscription.subscriptionId");
         System.out.println("session ID is : "+subscriptionID);
         resultsSet.put(subscriptionID,subscriptionID);
 
