@@ -4,17 +4,19 @@ import AppBase.baseClass;
 import BeemAPIsPayload.cognitoSigninCodePayload;
 import BeemAPIsPayload.cognitoSigninPayload;
 import BeemAPIsPayload.createNewSubscriptionPayload;
+import BeemAPIsPayload.getUserPayload;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.reporters.XMLConstants;
 
 public class beemHttpMethods extends baseClass {
+public static Response responseObj;
 
     public static Response getSessionID(){
-        Response responseObj = RestAssured.
+         responseObj = RestAssured.
                 given().log().all().
                 contentType("application/json").
-                header("appversion","4.0.86").
+                header("appversion","4.3.129(1)").
                 body(cognitoSigninCodePayload.cognitoSigninCodeGetSessionIDPayload).
                 when().log().all().
                 post()
@@ -25,10 +27,10 @@ public class beemHttpMethods extends baseClass {
 
 
     public static Response getIDToken(String sessionID){
-        Response responseObj = RestAssured.
+         responseObj = RestAssured.
                 given().log().all().
                 contentType("application/json").
-            //    header("appversion","4.0.86").
+                header("appversion","4.3.129(1)").
                 body(cognitoSigninPayload.cognitoSigninGetIDTokenPayload(sessionID)).
                 when().log().all().
                 post()
@@ -37,10 +39,22 @@ public class beemHttpMethods extends baseClass {
         return responseObj;
     }
 
+    public static Response getUserInfo(String idToken){
+        responseObj = RestAssured.
+                given().contentType("application/json").
+                header("Authorization",idToken).
+                header("appVersion","4.3.125(1)").
+                body(getUserPayload.getUserPayloadUsingIDToken()).
+                when().
+                post()
+                .then().extract().response();
+        return responseObj;
+    }
+
 
     public static Response createNewSubscription(String tokenID){
         System.out.println(tokenID);
-        Response responseObj = RestAssured.
+        responseObj = RestAssured.
                 given().log().all().
                 contentType("application/json").
                 header("Authorization",tokenID).

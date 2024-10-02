@@ -47,7 +47,7 @@ public class baseClass {
     protected static void setbaseURL(String env) {
         String baseUrl = "";
         if ( env.equalsIgnoreCase("dev")) {
-            baseUrl = properties.getProperty("BaseURL_BEEM");
+            baseUrl = properties.getProperty("DevBaseURL_BEEM");
         }
        
         RestAssured.baseURI = baseUrl;
