@@ -58,16 +58,11 @@ public class Login extends baseClass {
     
     @Then("Extract the ID token from response")
     public String ExtractTheIDTokenFromResponse() {
-    	tokenID = jsonpath(response).getString("data.cognitoSignin.response.AuthenticationResult.IdToken");
-        System.out.println("Token ID is : "+tokenID);
-        resultsSet.put(tokenID,tokenID);
+        tokenID = jsonpath(response).getString("data.cognitoSignin.response.AuthenticationResult.IdToken");
+        System.out.println("Token ID is : " + tokenID);
+        resultsSet.put(tokenID, tokenID);
         return tokenID;
 
     }
-
-        /*public String getTokenID() {
-        System.out.println("Elements : "+ Arrays.asList(resultsSet.toString()));
-        return tokenID;
-    }*/
 
 }
