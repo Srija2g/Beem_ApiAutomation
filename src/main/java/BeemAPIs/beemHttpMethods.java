@@ -1,13 +1,9 @@
 package BeemAPIs;
 
 import AppBase.baseClass;
-import BeemAPIsPayload.cognitoSigninCodePayload;
-import BeemAPIsPayload.cognitoSigninPayload;
-import BeemAPIsPayload.createNewSubscriptionPayload;
-import BeemAPIsPayload.getUserPayload;
+import BeemAPIsPayload.*;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.testng.reporters.XMLConstants;
 
 public class beemHttpMethods extends baseClass {
 public static Response responseObj;
@@ -49,6 +45,18 @@ public static Response responseObj;
                 when().
                 post()
                 .then().extract().response();
+        return responseObj;
+    }
+
+    public static Response getUserFundsSummeryInfo(String idToken){
+        responseObj = RestAssured.
+                given().contentType("application/json").
+                header("Authorization" , idToken).
+                header("appVersion" , "4.3.125(1)").
+                body(FundsSummaryPayload.fundsSummaryPayloadUsingIdToken()).
+                when().
+                post().
+                then().extract().response();
         return responseObj;
     }
 
