@@ -12,7 +12,7 @@ public static Response responseObj;
          responseObj = RestAssured.
                 given().
                 contentType("application/json").
-                header("appversion","4.3.129(1)").
+                header("appversion","4.3.295(2)").
                 body(cognitoSigninCodePayload.cognitoSigninCodeGetSessionIDPayload).
                 when().
                 post()
@@ -27,7 +27,7 @@ public static Response responseObj;
          responseObj = RestAssured.
                 given().
                 contentType("application/json").
-                header("appversion","4.3.129(1)").
+                header("appversion","4.3.295(2)").
                 body(cognitoSigninPayload.cognitoSigninGetIDTokenPayload(sessionID)).
                 when().
                 post()
@@ -40,7 +40,7 @@ public static Response responseObj;
         responseObj = RestAssured.
                 given().contentType("application/json").
                 header("Authorization",idToken).
-                header("appVersion","4.3.125(1)").
+                header("appVersion","4.3.295(2)").
                 body(getUserPayload.getUserPayloadUsingIDToken()).
                 when().
                 post()
@@ -48,11 +48,11 @@ public static Response responseObj;
         return responseObj;
     }
 
-    public static Response getUserFundsSummeryInfo(String idToken){
+    public static Response getUserFundsSummaryInfo(String idToken){
         responseObj = RestAssured.
                 given().contentType("application/json").
                 header("Authorization" , idToken).
-                header("appVersion" , "4.3.125(1)").
+                header("appVersion" , "4.3.295(2)").
                 body(FundsSummaryPayload.fundsSummaryPayloadUsingIdToken()).
                 when().
                 post().

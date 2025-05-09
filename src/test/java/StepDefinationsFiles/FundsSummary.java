@@ -5,7 +5,6 @@ import BeemAPIs.beemHttpMethods;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
-import jdk.internal.org.jline.terminal.TerminalBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,18 +19,20 @@ public class FundsSummary extends baseClass {
     public static Map<String ,String> resultSet = new HashMap<>();
 
     public void setLoginInstant(Login login){
+        System.out.println("This is getting printed");
         this.login = login;
+        System.out.println("This is getting printed");
 
     }
 
     @When("we get the details from Funds summary Api")
-    public void weGetTheDetailsFromFundsSummaryApi(){
-        this.response = beemHttpMethods.getUserFundsSummeryInfo(tokenID);
+    public void weGetTheDetailsFromFundsSummaryApi() {
+        this.response = beemHttpMethods.getUserFundsSummaryInfo(tokenID);
         System.out.println(tokenID);
     }
 
     @Then("print the details")
-    public void printTheDetails(){
-        System.out.println(response);
+    public void printTheDetails() {
+        System.out.println(response.prettyPrint());
     }
 }

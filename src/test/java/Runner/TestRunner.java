@@ -1,5 +1,6 @@
 package Runner;
 
+import StepDefinationsFiles.FundsSummary;
 import StepDefinationsFiles.GetUser;
 import StepDefinationsFiles.Login;
 import StepDefinationsFiles.Subscription;
@@ -19,15 +20,18 @@ public class TestRunner extends AbstractTestNGCucumberTests {
 
     private  Login loginInstance;
     private  GetUser getUserInstance;
+    private  FundsSummary fundsSummaryInstance;
 
     @BeforeClass
     public void setup() {
         // Initialize instances of Login and Subscription classes
         loginInstance = new Login();
         getUserInstance = new GetUser();
+        fundsSummaryInstance = new FundsSummary();
 
         // Set the Login instance in the Subscription class
         getUserInstance.setLoginInstance(loginInstance);
+        fundsSummaryInstance.setLoginInstant(loginInstance);
 
     }
 }
